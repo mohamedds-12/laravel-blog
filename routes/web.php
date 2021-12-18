@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,34 @@ use App\Http\Controllers\PostsController;
 |
 */
 
-// Routes to the home page
-Route::get('/', [PagesController::class, 'index']);
+// Pages
+Route::get('/', [PagesController::class, 'index'])->name('home');
+
+Route::get('/about', [PagesController::class, 'about'])->name('about');
 
 
-// Routes to the products page
-Route::get('/products', [ProductsController::class, 'index']);
+// Posts
+
+
+Route::get('/posts/trash', [PostsController::class, 'showTrash'])->name('posts.trash');
+Route::get('/posts/restore/{post}', [PostsController::class, 'restoreTrash'])->name('posts.restore');
+
+Route::delete('/posts/trash/{post}', [PostsController::class, 'softDelete'])->name('posts.delete');
+
+Route::resource('/posts', PostsController::class);
+
+
+
+
+
+
+
+
+// Routes to the register page
+Route::get('/admin/register', [UsersController::class, 'register'])->name('admin.register');
+Route::post('/admin', [UsersController::class, 'store'])->name('admin.store');
+
+// Route::post('/admin/register', [UsersController::class, 'store'])->name('admin.store');
 
 
 // Routes to the products page with a parameter #1
@@ -32,8 +55,5 @@ Route::get('/products', [ProductsController::class, 'index']);
 // ]);
 
 
-// Routes to the about page
-Route::get('/about', [PagesController::class, 'about'])->name('about');
 
-// Routes to posts
-route::get('/posts', [PostsController::class, 'index']);
+

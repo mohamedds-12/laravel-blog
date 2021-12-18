@@ -2,12 +2,10 @@
 
 namespace Database\Factories;
 
-
-use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class PostFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,10 +15,10 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->title(),
-            'content' => $this->faker->paragraph(),
+            'category_title' => $this->faker->title(),
+            // 'content' => $this->faker->paragraph(),
             // 'category_id' => $this->faker->numberBetween(1,1),
-            'image' => $this->faker->numberBetween(1,38),
+            // 'image' => $this->faker->numberBetween(1,38),
             'created_at' => now(),
         ];
     }
